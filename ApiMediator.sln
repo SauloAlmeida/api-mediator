@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30711.63
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiMediator.Core", "ApiMediator.Core\ApiMediator.Core.csproj", "{625A8857-4F8D-4FBC-B86F-B1F616F0B548}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiMediator.App", "ApiMediator.App\ApiMediator.App.csproj", "{7FD3F9EE-E75C-4CFD-B1C7-571677F6C5A6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{625A8857-4F8D-4FBC-B86F-B1F616F0B548}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{625A8857-4F8D-4FBC-B86F-B1F616F0B548}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{625A8857-4F8D-4FBC-B86F-B1F616F0B548}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{625A8857-4F8D-4FBC-B86F-B1F616F0B548}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FD3F9EE-E75C-4CFD-B1C7-571677F6C5A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FD3F9EE-E75C-4CFD-B1C7-571677F6C5A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FD3F9EE-E75C-4CFD-B1C7-571677F6C5A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FD3F9EE-E75C-4CFD-B1C7-571677F6C5A6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E7E62D56-B2E9-474B-94DB-8FD4C6E24A25}
+	EndGlobalSection
+EndGlobal
