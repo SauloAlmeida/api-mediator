@@ -4,7 +4,7 @@ namespace ApiMediator.App.Infrastructure.Configuration
 {
     public static class SwaggerSetup
     {
-        public static void AddConfigure(IApplicationBuilder app)
+        public static void Handle(IApplicationBuilder app)
         {
             app.UseSwagger();
 

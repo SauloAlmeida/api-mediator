@@ -7,9 +7,9 @@ namespace ApiMediator.App.Domain.Product.Handlers.Commands
 {
     public class CreateProductCommandHandler : ICommandHandler<CreateProductCommand, CreateProductResult>
     {
-        private readonly DatabaseContext context;
+        private readonly ApiDbContext context;
 
-        public CreateProductCommandHandler(DatabaseContext context)
+        public CreateProductCommandHandler(ApiDbContext context)
         {
             this.context = context;
         }

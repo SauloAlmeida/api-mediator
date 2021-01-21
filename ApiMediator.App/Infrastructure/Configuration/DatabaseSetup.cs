@@ -6,9 +6,9 @@ namespace ApiMediator.App.Infrastructure.Configuration
 {
     public static class DatabaseSetup
     {
-        public static void AddService(IServiceCollection services)
+        public static void Handle(IServiceCollection services)
         {
-            services.AddDbContext<DatabaseContext>(opt => opt.UseInMemoryDatabase("DatabaseContext"));
+            services.AddDbContext<ApiDbContext>(opt => opt.UseInMemoryDatabase("DatabaseContext"));
         }
     }
 }

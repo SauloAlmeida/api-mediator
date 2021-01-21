@@ -22,9 +22,11 @@ namespace ApiMediator
 
             services.AddSwaggerGen();
 
-            DatabaseSetup.AddService(services);
+            AppSettingsSetup.Handle(services, Configuration);
 
-            MediatorSetup.AddService(services);
+            DatabaseSetup.Handle(services);
+
+            MediatorSetup.Handle(services);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -40,7 +42,7 @@ namespace ApiMediator
 
             app.UseAuthorization();
 
-            SwaggerSetup.AddConfigure(app);
+            SwaggerSetup.Handle(app);
 
             app.UseEndpoints(endpoints =>
             {

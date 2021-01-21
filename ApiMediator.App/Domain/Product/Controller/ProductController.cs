@@ -1,8 +1,10 @@
 ﻿using ApiMediator.App.Domain.Product.DTOs;
 using ApiMediator.App.Domain.Product.Handlers.Commands;
+using ApiMediator.App.Domain.Product.Handlers.Queries;
 using ApiMediator.Core.Base.Controller;
 using Microsoft.AspNetCore.Mvc;
 using SimpleSoft.Mediator;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,17 +19,13 @@ namespace ApiMediator.App.Domain.Product.Controller
             this.mediator = mediator;
         }
 
-        //[HttpGet]
-        //public async Task<IEnumerable<ProductModel>> SearchAsync([FromQuery] string filterQ, [FromQuery] int? skip, [FromQuery] int? take, CancellationToken ct)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        [HttpGet("{id:guid}")]
+        public async Task<IActionResult> GetByIdAsync([FromRoute] Guid id, CancellationToken ct)
+        {
+            var result = await mediator.FetchAsync(new GetProductByIdQuery(id), ct);
 
-        //[HttpGet("{id:guid}")]
-        //public async Task<ProductModel> GetByIdAsync([FromRoute] Guid id, CancellationToken ct)
-        //{
-        //    throw new NotImplementedException();
-        //}
+            return Ok(result);
+        }
 
         [HttpPost]
         public async Task<IActionResult> CreateAsync([FromBody] CreateProductDTO dto, CancellationToken ct)
@@ -37,16 +35,14 @@ namespace ApiMediator.App.Domain.Product.Controller
             return Ok(result);
         }
 
-        //[HttpPut("{id:guid}")]
-        //public async Task UpdateAsync([FromRoute] Guid id, [FromBody] UpdateProductModel model, CancellationToken ct)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        [HttpPut("{id:guid}")]
+        public async Task<IActionResult> UpdateAsync([FromRoute] Guid id, [FromBody] UpdateProductDTO dto, CancellationToken ct)
+        {
+            // todo - add mapper and send model.product to command
 
-        //[HttpDelete("{id:guid}")]
-        //public async Task DeleteAsync([FromRoute] Guid id, CancellationToken ct)
-        //{
-        //    throw new NotImplementedException();
-        //}
+            var result = await mediator.SendAsync(new UpdateProductCommand(id, dto.Name, dto.Price), ct);
+
+            return Ok(result);
+        }
     }
 }

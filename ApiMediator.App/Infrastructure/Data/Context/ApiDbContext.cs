@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace ApiMediator.App.Infrastructure.Data.Context
 {
-    public class DatabaseContext : DbContext
+    public class ApiDbContext : DbContext
     {
-        public DatabaseContext(DbContextOptions<DatabaseContext> options)
+        public ApiDbContext(DbContextOptions<ApiDbContext> options)
             : base(options)
         {
         }
@@ -18,18 +18,18 @@ namespace ApiMediator.App.Infrastructure.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(DatabaseContext).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApiDbContext).Assembly);
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {
-            var entityEntries = ChangeTracker.Entries().Where(entry => entry.Entity.GetType().GetProperty("UpdateAt") != null) .ToArray();
+            var entityEntries = ChangeTracker.Entries().Where(entry => entry.Entity.GetType().GetProperty("UpdatedAt") != null).ToArray();
 
             foreach (var entry in entityEntries)
             {
                 if (entry.State == EntityState.Modified)
                 {
-                    entry.Property("UpdateAt").CurrentValue = DateTime.Now;
+                    entry.Property("UpdatedAt").CurrentValue = DateTime.Now;
                 }
             }
             
