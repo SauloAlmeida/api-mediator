@@ -9,10 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\Product\Handlers\Events\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\ApiMediator.Core\ApiMediator.Core.csproj" />
   </ItemGroup>
 

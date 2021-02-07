@@ -1,29 +1,25 @@
-﻿using ApiMediator.App.Infrastructure.Helper;
+﻿using ApiMediator.App.Infrastructure.Constants;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.Extensions.Logging;
+using System;
 using System.Net;
 
 namespace ApiMediator.App.Middleware
 {
     public class ExceptionMiddleware : IExceptionFilter
     {
-        private readonly ILogger logger;
-
-        public ExceptionMiddleware(ILogger logger)
-        {
-            this.logger = logger;
-        }
-
         public void OnException(ExceptionContext context)
         {
-            var exceptionMessage = ExceptionHelper.HandleExceptionMessage(context.Exception);
+            Exception exception = context.Exception;
+
+            if (exception.Message == Constants.Exception.TASK_CANCELED) return;
+
+            var exceptionMessage = exception.InnerException != null ? exception.Message + " " + exception.InnerException.Message : exception.Message;
 
             context.Result = new JsonResult(exceptionMessage);
 
             context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-
-            logger.LogError(exceptionMessage);
+            context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
         }
     }
 }

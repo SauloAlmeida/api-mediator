@@ -38,11 +38,10 @@ namespace ApiMediator.App.Domain.Product.Controller
         [HttpPut("{id:guid}")]
         public async Task<IActionResult> UpdateAsync([FromRoute] Guid id, [FromBody] UpdateProductDTO dto, CancellationToken ct)
         {
-            // todo - add mapper and send model.product to command
-
             var result = await mediator.SendAsync(new UpdateProductCommand(id, dto.Name, dto.Price), ct);
 
             return Ok(result);
         }
+
     }
 }

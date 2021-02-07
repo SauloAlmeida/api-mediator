@@ -22,19 +22,20 @@ namespace ApiMediator
 
             services.AddSwaggerGen();
 
+            DependecySetup.Handle(services);
+    
             AppSettingsSetup.Handle(services, Configuration);
 
             DatabaseSetup.Handle(services);
 
             MediatorSetup.Handle(services);
+
+            MiddlewareSetup.Handle(services);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
             app.UseHttpsRedirection();
 
@@ -44,11 +45,7 @@ namespace ApiMediator
 
             SwaggerSetup.Handle(app);
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-
+            app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
     }
 }
