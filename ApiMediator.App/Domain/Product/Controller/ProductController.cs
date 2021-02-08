@@ -43,5 +43,12 @@ namespace ApiMediator.App.Domain.Product.Controller
             return Ok(result);
         }
 
+        [HttpDelete("{id:guid}")]
+        public async Task<IActionResult> DeleteAsync([FromRoute] Guid id, CancellationToken ct)
+        {
+            await mediator.SendAsync(new DeleteProductCommand(id), ct);
+
+            return Ok();
+        }
     }
 }

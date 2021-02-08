@@ -3,14 +3,15 @@ using ApiMediator.App.Infrastructure.Data.EventContext;
 using ApiMediator.Core.Base.Controller;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using System.Text.Json;
 
 namespace ApiMediator.App.Domain.Event.Controller
 {
     public class EventController : BaseController
     {
-        private readonly ApiEventContext eventContext;
+        private readonly IEventContext eventContext;
 
-        public EventController(ApiEventContext eventContext)
+        public EventController(IEventContext eventContext)
         {
             this.eventContext = eventContext;
         }
@@ -18,15 +19,12 @@ namespace ApiMediator.App.Domain.Event.Controller
         [HttpGet("Product")]
         public IActionResult Get()
         {
-            var response = eventContext.GetAll<ProductEvent>();
-
-            var result = response.Select(s => new
-            {
-                Id = s.Id.Increment,
-                Payload = System.Text.Json.JsonSerializer.Deserialize<object>(s.Payload),
-                s.CreatedOn,
-                s.CreatedBy
-            });
+            var result = eventContext.GetAll<ProductEvent>()
+                                     .Select(s => new
+                                     {
+                                         Id = s.Id.Increment,
+                                         Payload = JsonSerializer.Deserialize<object>(s.Payload)
+                                     });
 
             return Ok(result);
         }

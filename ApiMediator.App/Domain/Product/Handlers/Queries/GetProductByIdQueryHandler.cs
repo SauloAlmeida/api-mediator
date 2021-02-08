@@ -11,16 +11,14 @@ namespace ApiMediator.App.Domain.Product.Handlers.Queries
     {
         private readonly IQueryable<Model.Product> products;
 
-        public GetProductByIdQueryHandler(ApiDbContext context)
+        public GetProductByIdQueryHandler(DatabaseContext context)
         {
             products = context.Products;
         }
 
         public async Task<Model.Product> HandleAsync(GetProductByIdQuery query, CancellationToken ct)
         {
-            var product = await products.AsNoTracking().FirstOrDefaultAsync(w => w.Id == query.ProductId);
-
-            // todo - Notify
+            var product = await products.AsNoTracking().FirstOrDefaultAsync(w => w.Id == query.ProductId, ct);
 
             return product;
         }

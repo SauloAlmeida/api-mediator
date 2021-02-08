@@ -7,7 +7,7 @@ namespace ApiMediator.App.Infrastructure.Configuration
     {
         public static void Handle(IServiceCollection service)
         {
-            service.AddScoped<ApiEventContext>();
+            service.AddTransient<IEventContext, EventContext>(); // on request - for every dependecy injection is create a new instance
         }
     }
 }

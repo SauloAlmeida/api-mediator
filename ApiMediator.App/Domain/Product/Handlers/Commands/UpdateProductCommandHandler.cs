@@ -7,13 +7,11 @@ namespace ApiMediator.App.Domain.Product.Handlers.Commands
 {
     public class UpdateProductCommandHandler : ICommandHandler<UpdateProductCommand, Model.Product>
     {
-        private readonly ApiDbContext context;
-        private readonly IMediator mediator;
+        private readonly DatabaseContext context;
 
-        public UpdateProductCommandHandler(ApiDbContext context, IMediator mediator)
+        public UpdateProductCommandHandler(DatabaseContext context, IMediator mediator)
         {
             this.context = context;
-            this.mediator = mediator;
         }
 
         public async Task<Model.Product> HandleAsync(UpdateProductCommand cmd, CancellationToken ct)

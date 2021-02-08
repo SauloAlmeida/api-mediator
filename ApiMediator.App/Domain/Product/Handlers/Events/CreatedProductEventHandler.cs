@@ -9,9 +9,9 @@ namespace ApiMediator.App.Domain.Product.Handlers.Events
 {
     public class CreatedProductEventHandler : IEventHandler<CreatedProductEvent>
     {
-        private readonly ApiEventContext eventContext;
+        private readonly IEventContext eventContext;
 
-        public CreatedProductEventHandler(ApiEventContext eventContext) => this.eventContext = eventContext;
+        public CreatedProductEventHandler(IEventContext eventContext) => this.eventContext = eventContext;
 
         public async Task HandleAsync(CreatedProductEvent evt, CancellationToken ct)
         {
